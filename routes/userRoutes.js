@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../entities/User');
-const Registration = require('../entities/Registration');
+const User = require('../entities/user');
+const Registration = require('../entities/registration');
 const UserDTO = require('../dtos/UserDTO');
 const { registerUser, loginUser, logout } = require('../controllers/authController');
 const { protect, admin } = require('../middleware/authMiddleware');

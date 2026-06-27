@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Admin = require('../entities/Admin');
+const Admin = require('../entities/admin');
 const AdminDTO = require('../dtos/AdminDTO');
 const { registerAdmin, loginAdmin, logout } = require('../controllers/authController');
 const { protect, admin } = require('../middleware/authMiddleware');

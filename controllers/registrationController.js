@@ -1,8 +1,8 @@
 const axios = require('axios');
 const crypto = require('crypto');
 const Registration = require('../entities/registration');
-const Payment = require('../entities/Payment');
-const Course = require('../entities/Course');
+const Payment = require('../entities/payment'); // Already correct, but good to confirm
+const Course = require('../entities/course'); // Already correct, but good to confirm
 const { sendRegistrationConfirmation, sendAdminPaymentNotification } = require('../routes/emailService');
 
 const PAYSTACK_SECRET_KEY = process.env.PAYSTACK_SECRET_KEY;

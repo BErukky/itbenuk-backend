@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
-const User = require('../entities/User');
+const User = require('../entities/user');
 const bcrypt = require('bcryptjs');
-const Admin = require('../entities/Admin');
+const Admin = require('../entities/admin');
 const UserDTO = require('../dtos/UserDTO');
 const AdminDTO = require('../dtos/AdminDTO');
 

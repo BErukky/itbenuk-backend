@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const ContactTicket = require('../entities/ContactTicket');
+const ContactTicket = require('../entities/contactTicket');
 const ContactTicketDTO = require('../dtos/ContactTicketDTO');
 const { sendAdminContactNotification } = require('./emailService');
 const { protect, admin } = require('../middleware/authMiddleware');

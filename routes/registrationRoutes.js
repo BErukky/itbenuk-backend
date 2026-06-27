@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const Registration = require('../entities/Registration');
-const Payment = require('../entities/Payment');
+const Registration = require('../entities/registration');
+const Payment = require('../entities/payment');
 const RegistrationDTO = require('../dtos/RegistrationDTO');
 const PaymentDTO = require('../dtos/PaymentDTO');
 const { protect, admin, optionalProtect } = require('../middleware/authMiddleware');

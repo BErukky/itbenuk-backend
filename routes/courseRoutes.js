@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Course = require('../entities/Course');
+const Course = require('../entities/course');
 const CourseDTO = require('../dtos/CourseDTO');
 const { protect, admin } = require('../middleware/authMiddleware');
 
