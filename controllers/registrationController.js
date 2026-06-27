@@ -1,6 +1,6 @@
 const axios = require('axios');
 const crypto = require('crypto');
-const Registration = require('../entities/Registration');
+const Registration = require('../entities/registration');
 const Payment = require('../entities/Payment');
 const Course = require('../entities/Course');
 const { sendRegistrationConfirmation, sendAdminPaymentNotification } = require('../routes/emailService');

@@ -5,12 +5,12 @@ const swaggerSpecs = require('./config/swagger');
 const connectDB = require('./config/connection');
 
 // Import Entities to ensure they are registered
-require('./entities/User');
-require('./entities/Admin');
-require('./entities/Registration');
-require('./entities/Payment');
-require('./entities/Course');
-require('./entities/ContactTicket');
+require('./entities/user');
+require('./entities/admin');
+require('./entities/registration');
+require('./entities/payment');
+require('./entities/course');
+require('./entities/contactTicket');
 
 // Import Routes
 const userRoutes = require('./routes/userRoutes');
