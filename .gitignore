@@ -1,0 +1,81 @@
+# 🚀 BYPASS MODE: Allowing dist to be uploaded to Google Cloud
+# /dist 
+
+/node_modules
+dist/tsconfig.build.tsbuildinfo
+/build
+
+# Logs
+logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+*.txt
+*afridam-backend-key.json
+
+# Documentation & Temporary Files
+*.md
+!README.md
+
+# OS
+.DS_Store
+
+# Tests
+/coverage
+/.nyc_output
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# dotenv environment variable files
+.env
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
+
+# temp directory
+.temp
+.tmp
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Diagnostic reports (https://nodejs.org/api/report.html)
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# 🛡️ AFRIDAM SECURITY BLOCK (CRITICAL)
+# Prevents Google/Firebase service account keys from reaching GitHub
+afridam-backend-key.json
+*.json
+!package.json
+!package-lock.json
+!pnpm-lock.yaml
+!tsconfig.json
+!tsconfig.build.json
+!nest-cli.json
+!components.json
+!project.json
+
+# Prisma
+/prisma/generated/
+node_modules/.prisma
