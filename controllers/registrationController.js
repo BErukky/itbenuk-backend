@@ -60,7 +60,7 @@ const createRegistration = async (req, res) => {
         email: registration.email,
         amount: course.priceNGN, // Amount in Kobo
         reference: registration.registrationId, // Use our unique ID as the reference
-        callback_url: `${process.env.FRONTEND_URL}/payment/verify`,
+        callback_url: `${process.env.NODE_ENV === 'production' ? process.env.FRONTEND_URL_PROD : process.env.FRONTEND_URL}/payment/verify`,
         metadata: {
           registration_id: registration._id.toString(),
           course_title: course.title,
