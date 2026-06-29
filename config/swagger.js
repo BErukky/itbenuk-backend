@@ -1,5 +1,10 @@
 const swaggerJsdoc = require('swagger-jsdoc');
 
+const isProduction = process.env.NODE_ENV === 'production';
+const serverUrl = isProduction
+  ? process.env.RENDER_EXTERNAL_URL || 'https://itbenuk-backend.onrender.com'
+  : 'http://localhost:5000';
+
 const options = {
   definition: {
     openapi: '3.0.0',
@@ -10,8 +15,8 @@ const options = {
     },
     servers: [
       {
-        url: 'http://localhost:5000',
-        description: 'Development server',
+        url: serverUrl,
+        description: isProduction ? 'Production server' : 'Development server',
       },
     ],
     components: {
@@ -24,7 +29,7 @@ const options = {
       },
     },
   },
-  apis: ['./routes/*.js'], // Path to the API docs
+  apis: ['./routes/*.js'],
 };
 
 const specs = swaggerJsdoc(options);
