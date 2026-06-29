@@ -51,12 +51,11 @@ const CourseSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// Middleware to create a URL-safe slug from the title before validation
-CourseSchema.pre('validate', function (next) {
-  if (this.isModified('title')) {
+// Slug is generated in the route handler but this acts as a safety net
+CourseSchema.pre('validate', function () {
+  if ((this.isNew || this.isModified('title')) && this.title) {
     this.slug = slugify(this.title, { lower: true, strict: true });
   }
-  next();
 });
 
 module.exports = mongoose.model('Course', CourseSchema);

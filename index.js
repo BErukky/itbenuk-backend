@@ -1,40 +1,28 @@
 const express = require('express');
 const dotenv = require('dotenv');
+const bodyParser = require('body-parser');
+dotenv.config();
+
 const swaggerUi = require('swagger-ui-express');
 const swaggerSpecs = require('./config/swagger');
 const connectDB = require('./config/connection');
 
-// Import Entities to ensure they are registered
-require('./entities/user');
-require('./entities/admin');
-require('./entities/registration');
-require('./entities/payment');
-require('./entities/course');
-require('./entities/contactTicket');
-
-// Import Routes
-const userRoutes = require('./routes/userRoutes');
-const adminRoutes = require('./routes/adminRoutes');
-// --- ENSURE THESE NEW ROUTES ARE PRESENT ---
-const courseRoutes = require('./routes/courseRoutes');
-const registrationRoutes = require('./routes/registrationRoutes');
-const paymentRoutes = require('./routes/paymentRoutes');
-const contactTicketRoutes = require('./routes/contactTicketRoutes');
-const healthRoutes = require('./routes/healthRoutes');
-
-
-// Connect to Database
-connectDB();
-
-dotenv.config();
-
+// ── App ───────────────────────────────────────────────────────────────────────
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Middleware
+// ── Middleware (must come BEFORE routes) ──────────────────────────────────────
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// CORS Middleware
+// Debug — log every incoming request
+app.use((req, res, next) => {
+  console.log(`[${req.method}] ${req.path} — body:`, req.body);
+  next();
+});
+
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
@@ -45,7 +33,23 @@ app.use((req, res, next) => {
   next();
 });
 
-// Routes
+// ── Entities (register Mongoose models) ──────────────────────────────────────
+require('./entities/user');
+require('./entities/admin');
+require('./entities/registration');
+require('./entities/payment');
+require('./entities/course');
+require('./entities/contactTicket');
+
+// ── Routes ────────────────────────────────────────────────────────────────────
+const userRoutes = require('./routes/userRoutes');
+const adminRoutes = require('./routes/adminRoutes');
+const courseRoutes = require('./routes/courseRoutes');
+const registrationRoutes = require('./routes/registrationRoutes');
+const paymentRoutes = require('./routes/paymentRoutes');
+const contactTicketRoutes = require('./routes/contactTicketRoutes');
+const healthRoutes = require('./routes/healthRoutes');
+
 app.use('/api/users', userRoutes);
 app.use('/api/admins', adminRoutes);
 app.use('/api/courses', courseRoutes);
@@ -54,15 +58,18 @@ app.use('/api/payments', paymentRoutes);
 app.use('/api/contact-tickets', contactTicketRoutes);
 app.use('/api/health', healthRoutes);
 
-// Swagger Documentation
+// ── Swagger ───────────────────────────────────────────────────────────────────
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
 
-// Basic Route
+// ── Root ──────────────────────────────────────────────────────────────────────
 app.get('/', (req, res) => {
-  res.send('NGO Backend API is running...');
+  res.send('iTbenuk Backend API is running...');
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-  console.log(`Swagger docs available at http://localhost:${PORT}/api-docs`);
+// ── Database + Start ──────────────────────────────────────────────────────────
+connectDB().then(() => {
+  app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+    console.log(`Swagger docs available at http://localhost:${PORT}/api-docs`);
+  });
 });

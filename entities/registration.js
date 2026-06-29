@@ -60,12 +60,10 @@ const RegistrationSchema = new mongoose.Schema(
 );
 
 // Middleware to create a human-readable registrationId before saving
-RegistrationSchema.pre('validate', function (next) {
-  // Only generate ID for new documents
+RegistrationSchema.pre('validate', function () {
   if (this.isNew) {
     this.registrationId = `ITB-${crypto.randomBytes(6).toString('hex').toUpperCase()}`;
   }
-  next();
 });
 
 module.exports = mongoose.model('Registration', RegistrationSchema);

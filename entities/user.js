@@ -40,11 +40,8 @@ const UserSchema = new mongoose.Schema(
   }
 );
 
-UserSchema.pre('save', async function (next) {
-  if (!this.isModified('passwordHash')) {
-    return next();
-  }
-  // Per BE-2-01, salt rounds should be 12
+UserSchema.pre('save', async function () {
+  if (!this.isModified('passwordHash')) return;
   const salt = await bcrypt.genSalt(12);
   this.passwordHash = await bcrypt.hash(this.passwordHash, salt);
 });

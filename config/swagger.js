@@ -4,9 +4,9 @@ const options = {
   definition: {
     openapi: '3.0.0',
     info: {
-      title: 'NGO Backend API',
+      title: 'iTbenuk Backend API',
       version: '1.0.0',
-      description: 'API documentation for the NGO backend portal',
+      description: 'API documentation for the iTbenuk backend',
     },
     servers: [
       {

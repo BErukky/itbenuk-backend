@@ -58,11 +58,10 @@ const ContactTicketSchema = new mongoose.Schema(
 );
 
 // Middleware to create a human-readable ticketId before saving
-ContactTicketSchema.pre('validate', function (next) {
+ContactTicketSchema.pre('validate', function () {
   if (this.isNew) {
     this.ticketId = `TKT-${crypto.randomBytes(6).toString('hex').toUpperCase()}`;
   }
-  next();
 });
 
 module.exports = mongoose.model('ContactTicket', ContactTicketSchema);
